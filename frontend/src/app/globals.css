@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+:root {
+  /* Colors */
+  --color-bg-deep: #121212;
+  --color-bg-surface: #000000;
+  --color-bg-elevated: #080808;
+  --color-glass-fill: rgba(255, 255, 255, 0.03);
+  --color-glass-border: rgba(255, 255, 255, 0.06);
+
+  --color-teal-primary: #ffffff;
+  --color-teal-glow: rgba(255, 255, 255, 0.10);
+  --color-teal-muted: #d4d4d4;
+  --color-teal-dark: #b3b3b3;
+
+  --color-white: #ffffff;
+  --color-slate-300: #d4d4d4;
+  --color-slate-400: #b3b3b3;
+  --color-slate-500: #4c4c4c;
+  --color-peach: #f9b17a;
+
+  --severity-critical: #ff4d4d;
+  --severity-high: #ff8c42;
+  --severity-medium: #f9b17a;
+  --severity-low: #d4d4d4;
+
+  /* Glass */
+  --glass-blur: 16px;
+  --glass-blur-heavy: 32px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: all 0.15s ease;
+  --transition-base: all 0.2s ease;
+  --transition-slow: all 0.35s ease;
+}
+
+/* Tailwind CSS v4 custom theme mappings */
+@theme {
+  --font-display: var(--font-display), sans-serif;
+  --font-mono: var(--font-mono), monospace;
+
+  --color-teal-primary: var(--color-teal-primary);
+  --color-teal-glow: var(--color-teal-glow);
+  --color-teal-muted: var(--color-teal-muted);
+  --color-teal-dark: var(--color-teal-dark);
+
+  --color-slate-300: var(--color-slate-300);
+  --color-slate-400: var(--color-slate-400);
+  --color-slate-500: var(--color-slate-500);
+
+  --color-bg-deep: var(--color-bg-deep);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-bg-elevated: var(--color-bg-elevated);
+  --color-peach: var(--color-peach);
+
+  --color-critical: var(--severity-critical);
+  --color-high: var(--severity-high);
+  --color-medium: var(--severity-medium);
+  --color-low: var(--severity-low);
+
+  --blur-glass: 16px;
+  --blur-heavy: 32px;
+
+  --animate-fade-in-up: fadeInUp 0.4s ease-out forwards;
+  --animate-shimmer: shimmer 1.5s infinite linear;
+  --animate-glow-pulse: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+}
+
+/* Glassmorphism Classes */
+.glass-subtle {
+  background: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.glass-base {
+  background: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.glass-elevated {
+  background: #050505 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+.glass-strong {
+  background: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.teal-glow {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(255, 255, 255, 0.08),
+    0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.teal-glow-hover:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25),
+    0 0 50px rgba(255, 255, 255, 0.15),
+    0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Base resets & styles */
+html,
+body {
+  background-color: var(--color-bg-deep);
+  color: var(--color-white);
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--font-display), sans-serif;
+  overflow-x: hidden;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Syntax Highlighting Tokens (One Dark inspired) */
+.token-keyword {
+  color: #00d4d4;
+  font-weight: 500;
+}
+
+.token-string {
+  color: #f9b17a;
+}
+
+.token-comment {
+  color: #424a69;
+  font-style: italic;
+}
+
+.token-function {
+  color: #6b76d9;
+}
+
+.token-variable {
+  color: #ffffff;
+}
+
+.token-number {
+  color: #ff8c42;
+}
+
+.token-punctuation {
+  color: #a0aec0;
+}
+
+.token-class {
+  color: #00d4d4;
+}
+
+.token-operator {
+  color: #00d4d4;
+}
+
+/* Custom skeleton shimmer */
+.shimmer-bg {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.05) 75%);
+  background-size: 200% 100%;
+}
