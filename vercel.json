@@ -8,7 +8,6 @@
     "backend": {
       "root": "backend",
       "entrypoint": "api/index.ts",
-      "runtime": "@vercel/node",
       "routePrefix": "/_backend"
     }
   }
