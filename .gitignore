@@ -10,6 +10,7 @@
 !/docker-compose.yml
 !/.gitignore
 !/commit_history.txt
+!/vercel.json
 
 # Ignore frontend build artifacts and dependencies
 /frontend/node_modules/
