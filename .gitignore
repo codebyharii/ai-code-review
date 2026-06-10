@@ -1,0 +1,27 @@
+# Ignore everything in the parent root workspace
+/*
+
+# Whitelist AI Code Review Assistant folders and files
+!/frontend/
+!/backend/
+!/README.md
+!/ARCHITECTURE.md
+!/AI_USAGE.md
+!/docker-compose.yml
+!/.gitignore
+!/commit_history.txt
+
+# Ignore frontend build artifacts and dependencies
+/frontend/node_modules/
+/frontend/.next/
+/frontend/out/
+/frontend/build/
+/frontend/.env
+/frontend/.env.local
+/frontend/package-lock.json
+
+# Ignore backend build artifacts and dependencies
+/backend/node_modules/
+/backend/dist/
+/backend/.env
+/backend/package-lock.json
