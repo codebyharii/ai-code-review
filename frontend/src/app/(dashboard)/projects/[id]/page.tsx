@@ -27,7 +27,8 @@ import {
 } from 'lucide-react';
 import { ProjectFile } from '@/types';
 
-export default function ProjectDetailPage({ params }: { params: { id: string } }) {
+export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params);
   const {
     projects,
     activeFile,
@@ -50,7 +51,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
   const [docsError, setDocsError] = useState<string | null>(null);
 
   // Retrieve current project
-  const currentProject = projects.find(p => p.id === params.id);
+  const currentProject = projects.find(p => p.id === id);
 
   const handleGenerateDocs = async () => {
     if (!currentProject) return;
@@ -85,7 +86,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
         setActiveFile(currentProject.files[0]);
       }
     }
-  }, [params.id, currentProject, setActiveProjectId, setActiveFile, activeFile]);
+  }, [id, currentProject, setActiveProjectId, setActiveFile, activeFile]);
 
   // If project is not found, render error state
   if (!currentProject) {
