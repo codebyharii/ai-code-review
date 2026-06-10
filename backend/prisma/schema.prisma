@@ -1,5 +1,5 @@
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  id           String       @id @default(uuid())
   email        String       @unique
   passwordHash String
   name         String
@@ -18,11 +18,11 @@ model User {
 }
 
 model Project {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  id           String        @id @default(uuid())
   name         String
   description  String?
   createdAt    DateTime      @default(now())
-  userId       String        @db.ObjectId
+  userId       String
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   files        File[]
   reviews      Review[]
@@ -30,55 +30,55 @@ model Project {
 }
 
 model File {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
   name      String
   path      String
-  content   String
+  content   String   @db.Text
   language  String
-  projectId String   @db.ObjectId
+  projectId String
   project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
 
 model Review {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(uuid())
   projectName String
   type        String   // "security" | "performance" | "quality"
-  summary     String
+  summary     String   @db.Text
   status      String   // "success" | "pending" | "error"
-  projectId   String   @db.ObjectId
+  projectId   String
   project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   issues      Issue[]
 }
 
 model Issue {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  id             String   @id @default(uuid())
   title          String
-  description    String
-  recommendation String
+  description    String   @db.Text
+  recommendation String   @db.Text
   severity       String   // "critical" | "high" | "medium" | "low"
   filePath       String
   lineStart      Int?
   lineEnd        Int?
-  reviewId       String   @db.ObjectId
+  reviewId       String
   review         Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 }
 
 model AIProvider {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
   name      String   // "OpenAI" | "LM Studio" | "Ollama" etc.
   baseUrl   String
   apiKey    String?
   modelName String
   active    Boolean  @default(false)
-  userId    String   @db.ObjectId
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ChatSession {
-  id        String        @id @default(auto()) @map("_id") @db.ObjectId
-  projectId String        @db.ObjectId
+  id        String        @id @default(uuid())
+  projectId String
   project   Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   userId    String
   createdAt DateTime      @default(now())
@@ -86,10 +86,10 @@ model ChatSession {
 }
 
 model ChatMessage {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  id        String      @id @default(uuid())
   role      String      // "user" | "assistant"
-  content   String
-  sessionId String      @db.ObjectId
+  content   String      @db.Text
+  sessionId String
   session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   createdAt DateTime    @default(now())
 }
