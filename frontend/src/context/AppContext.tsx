@@ -42,6 +42,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/a
 const mapProviderLogo = (name: string): string => {
   const lowercase = name.toLowerCase();
   if (lowercase.includes('openai')) return '⚡';
+  if (lowercase.includes('gemini')) return '✨';
   if (lowercase.includes('ollama')) return '🦙';
   if (lowercase.includes('lm')) return '💻';
   return '🪐';

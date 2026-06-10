@@ -40,6 +40,14 @@ export class AuthService {
           userId: user.id,
         },
         {
+          name: 'Google Gemini',
+          baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
+          apiKey: '',
+          modelName: 'gemini-1.5-flash',
+          active: false,
+          userId: user.id,
+        },
+        {
           name: 'Ollama',
           baseUrl: 'http://localhost:11434/v1',
           apiKey: '',
